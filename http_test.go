@@ -17,8 +17,7 @@ func init() {
 type HandlerSuite struct{}
 
 func (s *HandlerSuite) TestHomeHandler(c *check.C) {
-	m := http.NewServeMux()
-	m.HandleFunc("/", HomeHandler)
+	m := NewMux()
 	v := httptest.NewServer(m)
 
 	res, err := http.Get(v.URL)
