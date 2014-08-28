@@ -1,0 +1,14 @@
+{
+	"ImportPath": "github.com/subosito/pkgo",
+	"GoVersion": "go1.3.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/zenazn/goji/web",
+			"Rev": "9e8d33cb030a55965ec27ec020943ba07e359853"
+		},
+		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "91ae5f88a67b14891cfd43895b01164f6c120420"
+		}
+	]
+}

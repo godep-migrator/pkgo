@@ -1,4 +1,4 @@
 fmt:
 	go fmt ./...
 test:
-	go test -check.v
+	godep go test -check.v
