@@ -18,5 +18,5 @@ build:
     - script:
         name: go test
         code: |
-          godep go test ./...
+          godep go test -check.v
 
