@@ -2,7 +2,6 @@ package pkgo
 
 import (
 	"github.com/zenazn/goji/web"
-	"html/template"
 	"net/http"
 )
 
@@ -15,9 +14,7 @@ func NewMux() *web.Mux {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	s := box.MustString("templates/home.html.tmpl")
-	t := template.Must(template.New("home.html.tmpl").Parse(s))
-	t.Execute(w, nil)
+	tpl.Execute(w, nil)
 }
 
 func FaviconHandler(w http.ResponseWriter, r *http.Request) {
