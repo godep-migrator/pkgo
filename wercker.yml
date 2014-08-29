@@ -3,20 +3,19 @@ build:
   steps:
     - setup-go-workspace
     - script:
-      name: go get
-      code: |
-        cd $WERCKER_SOURCE_DIR
-        go version
-        go get github.com/tools/godep
-        godep restore
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get github.com/tools/godep
+          godep restore
 
     - script:
-      name: go build
-      code: |
-        godep go build ./...
+        name: go build
+        code: |
+          godep go build ./...
 
     - script:
-      name: go test
-      code: |
-        godep go test -check.v
-
+        name: go test
+        code: |
+          godep go test -check.v
