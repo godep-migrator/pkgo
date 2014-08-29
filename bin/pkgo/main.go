@@ -15,9 +15,13 @@ func init() {
 }
 
 func main() {
+	var err error
+
 	if !flag.Parsed() {
 		flag.Parse()
 	}
+
+	pkgo.Boot()
 
 	m := pkgo.NewMux()
 	m.Use(middleware.RequestID)
@@ -33,7 +37,7 @@ func main() {
 	graceful.HandleSignals()
 	bind.Ready()
 
-	err := graceful.Serve(listener, http.DefaultServeMux)
+	err = graceful.Serve(listener, http.DefaultServeMux)
 	if err != nil {
 		log.Fatal(err)
 	}
