@@ -3,8 +3,30 @@
 <head>
   <title>PKGO.ME</title>
   <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/pure-min.css">
 </head>
 <body>
-  {{template "content" .}}
+
+  <div class="pure-g">
+    <div class="pure-u-md-1-5"></div>
+    <div class="pure-u-md-4-5">
+      <header id="header">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <a href="/">PKGO.ME</a>
+        </div>
+      </header>
+
+      {{template "content" .}}
+
+      <footer id="footer">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul>
+            <li><a href="https://github.com/subosito/pkgo">Source Code</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
