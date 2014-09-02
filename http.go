@@ -1,7 +1,9 @@
 package pkgo
 
 import (
+	"github.com/google/go-github/github"
 	"github.com/zenazn/goji/web"
+	"log"
 	"net/http"
 )
 
@@ -12,6 +14,10 @@ func NewMux() *web.Mux {
 	m.Get("/robots.txt", RobotsHandler)
 	m.Get("/css/theme.css", CSSHandler)
 	m.Get("/about", AboutHandler)
+
+	// oauth2
+	m.Get("/auth", OauthHandler)
+	m.Get("/auth/callback", OauthCallbackHandler)
 
 	return m
 }
@@ -36,4 +42,30 @@ func CSSHandler(w http.ResponseWriter, r *http.Request) {
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	tps["about"].Execute(w, nil)
+}
+
+func OauthHandler(w http.ResponseWriter, r *http.Request) {
+	u := gh.AuthCodeURL("")
+	http.Redirect(w, r, u, http.StatusTemporaryRedirect)
+}
+
+func OauthCallbackHandler(w http.ResponseWriter, r *http.Request) {
+	authCode := r.FormValue("code")
+	log.Println(authCode)
+
+	token, err := gh.Exchange(authCode)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	t := gh.NewTransport()
+	t.SetToken(token)
+
+	c := github.NewClient(&http.Client{Transport: t})
+	u, _, err := c.Users.Get("")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	log.Println(u.Email)
 }
