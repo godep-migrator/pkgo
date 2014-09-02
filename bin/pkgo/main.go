@@ -21,6 +21,8 @@ func main() {
 		flag.Parse()
 	}
 
+	pkgo.Initialize()
+
 	m := pkgo.NewMux()
 	m.Use(middleware.RequestID)
 	m.Use(middleware.Logger)

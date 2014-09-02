@@ -17,6 +17,10 @@ func init() {
 
 type HandlerSuite struct{}
 
+func (s *HandlerSuite) SetUpSuite(c *check.C) {
+	Initialize()
+}
+
 func (s *HandlerSuite) TestHomeHandler(c *check.C) {
 	m := NewMux()
 	v := httptest.NewServer(m)

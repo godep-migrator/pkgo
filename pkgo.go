@@ -9,15 +9,12 @@ import (
 var box *rice.Box
 var tps = map[string]*template.Template{}
 
-func init() {
+func Initialize() {
 	box = rice.MustFindBox("assets")
 
 	s := box.MustString("templates/layout.html.tmpl")
 
-	templates := []string{
-		"home",
-		"about",
-	}
+	templates := []string{"home", "about"}
 
 	for _, f := range templates {
 		t := template.Must(template.New("_").Parse(s))
