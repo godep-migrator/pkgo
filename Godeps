@@ -20,12 +20,12 @@
 			"Rev": "32db53ef5527a4261a5a52595ee079d5413301a7"
 		},
 		{
-			"ImportPath": "github.com/google/go-github/github",
-			"Rev": "56f6b12f8ce99c254a30f48d87d8bb28024a9e4e"
+			"ImportPath": "github.com/stretchr/objx",
+			"Rev": "cbeaeb16a013161a98496fad62933b1d21786672"
 		},
 		{
-			"ImportPath": "github.com/google/go-querystring/query",
-			"Rev": "30f7a39f4a218feb5325f3aebc60c32a572a8274"
+			"ImportPath": "github.com/subosito/anoa",
+			"Rev": "0b48f8a6863e5c08e271326260f4481b886acbba"
 		},
 		{
 			"ImportPath": "github.com/zenazn/goji/web",

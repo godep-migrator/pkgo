@@ -1,9 +1,8 @@
 package pkgo
 
 import (
-	"github.com/google/go-github/github"
+	ag "github.com/subosito/anoa/github"
 	"github.com/zenazn/goji/web"
-	"log"
 	"net/http"
 )
 
@@ -51,21 +50,11 @@ func OauthHandler(w http.ResponseWriter, r *http.Request) {
 
 func OauthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	authCode := r.FormValue("code")
-	log.Println(authCode)
 
-	token, err := gh.Exchange(authCode)
+	_, err := ag.Complete(gh, authCode)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	t := gh.NewTransport()
-	t.SetToken(token)
-
-	c := github.NewClient(&http.Client{Transport: t})
-	u, _, err := c.Users.Get("")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	log.Println(u.Email)
+	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }

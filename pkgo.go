@@ -4,6 +4,7 @@ import (
 	"fmt"
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/golang/oauth2"
+	ag "github.com/subosito/anoa/github"
 	"html/template"
 	"os"
 )
@@ -38,16 +39,14 @@ func initAssets() {
 func initOauth2() {
 	var err error
 
-	authURL := "https://github.com/login/oauth/authorize"
-	authToken := "https://github.com/login/oauth/access_token"
 	authConfig := &oauth2.Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		RedirectURL:  os.Getenv("CLIENT_REDIRECT_URL"),
-		Scopes:       []string{"email"},
+		Scopes:       []string{"user:email"},
 	}
 
-	gh, err = oauth2.NewConfig(authConfig, authURL, authToken)
+	gh, err = ag.NewConfig(authConfig)
 	if err != nil {
 		panic(err)
 	}
