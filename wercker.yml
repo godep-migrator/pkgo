@@ -1,4 +1,6 @@
 box: wercker/golang
+services:
+  - wercker/redis
 build:
   steps:
     - setup-go-workspace
