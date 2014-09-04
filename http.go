@@ -12,6 +12,7 @@ func NewMux() *web.Mux {
 	m.Get("/favicon.ico", FaviconHandler)
 	m.Get("/robots.txt", RobotsHandler)
 	m.Get("/css/theme.css", CSSHandler)
+	m.Get("/css/auth-icons.png", AuthIconsHandler)
 	m.Get("/about", AboutHandler)
 
 	// oauth2
@@ -36,7 +37,12 @@ func RobotsHandler(w http.ResponseWriter, r *http.Request) {
 func CSSHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/css")
 	w.Write(box.MustBytes("stylesheets/pure-min.css"))
+	w.Write(box.MustBytes("stylesheets/auth-buttons.css"))
 	w.Write(box.MustBytes("stylesheets/theme.css"))
+}
+
+func AuthIconsHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write(box.MustBytes("images/auth-icons.png"))
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +57,7 @@ func OauthHandler(w http.ResponseWriter, r *http.Request) {
 func OauthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	authCode := r.FormValue("code")
 
-	_, err := ag.Complete(gh, authCode)
+	_, _, err := ag.Complete(gh, authCode)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

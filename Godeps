@@ -25,7 +25,7 @@
 		},
 		{
 			"ImportPath": "github.com/subosito/anoa",
-			"Rev": "0b48f8a6863e5c08e271326260f4481b886acbba"
+			"Rev": "ce5d99c145bf15459f4d5b0fc1b8683a1fe064ea"
 		},
 		{
 			"ImportPath": "github.com/zenazn/goji/web",
