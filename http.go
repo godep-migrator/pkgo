@@ -3,21 +3,29 @@ package pkgo
 import (
 	ag "github.com/subosito/anoa/github"
 	"github.com/zenazn/goji/web"
+	"github.com/zenazn/goji/web/middleware"
 	"net/http"
 )
 
 func NewMux() *web.Mux {
 	m := web.New()
 	m.Get("/", HomeHandler)
-	m.Get("/favicon.ico", FaviconHandler)
+	m.Get("/about", AboutHandler)
+	m.Get("/logout", LogoutHandler)
+
+	// assets
 	m.Get("/robots.txt", RobotsHandler)
+	m.Get("/favicon.ico", FaviconHandler)
 	m.Get("/css/theme.css", CSSHandler)
 	m.Get("/css/auth-icons.png", AuthIconsHandler)
-	m.Get("/about", AboutHandler)
 
 	// oauth2
 	m.Get("/auth", OauthHandler)
 	m.Get("/auth/callback", OauthCallbackHandler)
+
+	// middlewares
+	m.Use(middleware.EnvInit)
+	m.Use(AuthMiddleware)
 
 	return m
 }
@@ -49,6 +57,14 @@ func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	tps["about"].Execute(w, nil)
 }
 
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	cs := session(r)
+	cs.Options.MaxAge = -1
+	cs.Save(r, w)
+
+	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+}
+
 func OauthHandler(w http.ResponseWriter, r *http.Request) {
 	u := gh.AuthCodeURL("")
 	http.Redirect(w, r, u, http.StatusTemporaryRedirect)
@@ -57,10 +73,15 @@ func OauthHandler(w http.ResponseWriter, r *http.Request) {
 func OauthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	authCode := r.FormValue("code")
 
-	_, _, err := ag.Complete(gh, authCode)
+	user, token, err := ag.Complete(gh, authCode)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+
+	cs := session(r)
+	cs.Values["current-user"] = user
+	cs.Values["access-token"] = token
+	cs.Save(r, w)
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }

@@ -22,6 +22,7 @@ func main() {
 	}
 
 	pkgo.Initialize()
+	defer pkgo.Terminate()
 
 	m := pkgo.NewMux()
 	m.Use(middleware.RequestID)
