@@ -1,6 +1,7 @@
 package pkgo
 
 import (
+	"github.com/subosito/anoa"
 	ag "github.com/subosito/anoa/github"
 	"github.com/zenazn/goji/web"
 	"github.com/zenazn/goji/web/middleware"
@@ -30,8 +31,12 @@ func NewMux() *web.Mux {
 	return m
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	tps["home"].Execute(w, nil)
+type TemplateData struct {
+	User *anoa.User
+}
+
+func HomeHandler(c web.C, w http.ResponseWriter, r *http.Request) {
+	tps["home"].Execute(w, TemplateData{User: c.Env["current-user"].(*anoa.User)})
 }
 
 func FaviconHandler(w http.ResponseWriter, r *http.Request) {

@@ -8,25 +8,34 @@
 <body>
 
   <div class="pure-g">
-    <div class="pure-u-md-1-5"></div>
-    <div class="pure-u-md-4-5">
-      <header id="header">
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <a href="/">PKGO.ME</a>
+    <div class="pure-u-md-1-8"></div>
+    <div class="pure-u-md-3-4">
+      <header id="header" class="pure-g">
+        <div class="pure-u-md-1-2">
+          <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <li><a href="/">PKGO.ME</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="https://github.com/subosito/pkgo" target="_blank">Code</a></li>
+          </div>
+        </div>
+        <div class="pure-u-md-1-2 text-right">
+          {{if .User}}
+          <p>{{.User.Nickname}} <a href="/logout" class="btn-auth">Logout</a><p>
+          {{else}}
+          <a class="btn-auth btn-github large btn-sign-in" href="/auth">Sign in with <strong>GitHub</strong></a>
+          {{end}}
         </div>
       </header>
+      <hr class="separator">
 
       {{template "content" .}}
 
-      <footer id="footer">
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <ul>
-            <li><a href="https://github.com/subosito/pkgo">Source Code</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </div>
+      <hr class="separator separator-minor">
+      <footer id="footer" class="text-center">
+        <em>Built by <a href="https://github.com/subosito" target="_blank">@subosito</a></em>
       </footer>
     </div>
+    <div class="pure-u-md-1-8"></div>
   </div>
 </body>
 </html>
