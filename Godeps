@@ -16,8 +16,24 @@
 			"Rev": "44882fc939f4c58d87a60de34796c6cfb9623269"
 		},
 		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Rev": "8d6d4f929affa96b443abd7fdb5a32ffc27865dc"
+		},
+		{
 			"ImportPath": "github.com/golang/oauth2",
 			"Rev": "32db53ef5527a4261a5a52595ee079d5413301a7"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Rev": "1b0c7f6e9ab3d7f500fd7d50c7ad835ff428139b"
+		},
+		{
+			"ImportPath": "github.com/gorilla/sessions",
+			"Rev": "aa5e036e6c44aec69a32eb41097001978b29ad31"
 		},
 		{
 			"ImportPath": "github.com/stretchr/objx",
@@ -30,6 +46,11 @@
 		{
 			"ImportPath": "github.com/zenazn/goji/web",
 			"Rev": "9e8d33cb030a55965ec27ec020943ba07e359853"
+		},
+		{
+			"ImportPath": "gopkg.in/boj/redistore.v1",
+			"Comment": "v1",
+			"Rev": "9d1554b400d726c7aa54b6e4a836f273b72b97f7"
 		},
 		{
 			"ImportPath": "gopkg.in/check.v1",
