@@ -44,6 +44,11 @@
 			"Rev": "ce5d99c145bf15459f4d5b0fc1b8683a1fe064ea"
 		},
 		{
+			"ImportPath": "github.com/subosito/gotenv",
+			"Comment": "v0.1.0-7-gd4d64e5",
+			"Rev": "d4d64e5ba2c20d2e97ef59f2f69e8644c49bd894"
+		},
+		{
 			"ImportPath": "github.com/zenazn/goji/web",
 			"Rev": "9e8d33cb030a55965ec27ec020943ba07e359853"
 		},

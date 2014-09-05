@@ -1,2 +1,4 @@
 .wercker
 .env
+*.rice-box.go
+coverage.out
